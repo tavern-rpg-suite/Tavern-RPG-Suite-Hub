@@ -1,0 +1,9 @@
+{
+    "display_name": "Tavern RPG Suite — Hub",
+    "loading_order": 100,
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Arkana8",
+    "version": "1.1.0",
+    "homePage": "https://github.com/tavern-rpg-suite"
+}

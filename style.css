@@ -1,0 +1,132 @@
+/* ============================================================
+   TAVERN RPG SUITE — HUB
+   The panel answers three questions without being asked: what is there, what do I
+   have, and is any of it out of date. Every button that would have asked one of
+   those questions is a spinner instead.
+   ============================================================ */
+
+.rsh-settings .rsh-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.rsh-settings .rsh-introtxt { font-size: .8rem; opacity: .75; line-height: 1.45; }
+.rsh-settings .rsh-counts { font-size: .76rem; opacity: .6; margin-left: auto; white-space: nowrap; }
+
+.rsh-settings .rsh-list { display: flex; flex-direction: column; gap: 4px; max-height: 48vh; overflow-y: auto; padding-right: 4px; }
+.rsh-settings .rsh-list::-webkit-scrollbar { width: 7px; }
+.rsh-settings .rsh-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
+
+.rsh-settings .rsh-row {
+    display: flex; align-items: center; gap: 9px;
+    padding: 7px 10px; border-radius: 7px;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    transition: background .15s, border-color .15s, opacity .15s;
+}
+.rsh-settings .rsh-row:hover { background: rgba(255,255,255,.06); }
+/* installed and current: present, but it should not compete for attention */
+.rsh-settings .rsh-row.rsh-ready { opacity: .55; }
+.rsh-settings .rsh-row.rsh-zip { opacity: .55; }
+.rsh-settings .rsh-row.rsh-update { border-color: rgba(255,176,66,.55); background: rgba(255,176,66,.08); }
+.rsh-settings .rsh-row.rsh-working { border-color: rgba(159,182,216,.5); }
+
+.rsh-settings .rsh-emoji { font-size: 17px; flex: 0 0 auto; }
+.rsh-settings .rsh-body { flex: 1; min-width: 0; }
+.rsh-settings .rsh-name { font-weight: 600; font-size: .85rem; display: flex; align-items: center; gap: 6px; }
+.rsh-settings .rsh-desc { font-size: .75rem; opacity: .7; line-height: 1.4; margin-top: 1px; }
+.rsh-settings .rsh-tag {
+    font-size: .6rem; padding: 1px 6px; border-radius: 9px; text-transform: uppercase; letter-spacing: .4px;
+    background: rgba(159,182,216,.18); color: #9fb6d8;
+}
+
+.rsh-settings .rsh-act { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; min-width: 92px; justify-content: flex-end; padding-right: 4px; }
+.rsh-settings .rsh-btn {
+    font: inherit; font-size: .74rem; padding: 3px 11px; border-radius: 5px; cursor: pointer;
+    border: 1px solid transparent; color: inherit; background: rgba(255,255,255,.09);
+    transition: filter .15s;
+}
+.rsh-settings .rsh-btn:hover { filter: brightness(1.3); }
+.rsh-settings .rsh-btn.go { background: rgba(110,164,79,.24); border-color: rgba(110,164,79,.5); }
+.rsh-settings .rsh-btn.upd { background: rgba(255,176,66,.22); border-color: rgba(255,176,66,.55); }
+.rsh-settings .rsh-btn.ghost { text-decoration: none; opacity: .8; }
+
+.rsh-settings .rsh-lbl { font-size: .72rem; opacity: .6; white-space: nowrap; }
+.rsh-settings .rsh-lbl.ok { color: #6ea44f; opacity: .85; }
+.rsh-settings .rsh-lbl.zip { cursor: help; border-bottom: 1px dotted currentColor; }
+
+/* the one animation that matters: something is happening right now */
+.rsh-settings .rsh-spin {
+    width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto;
+    border: 2px solid rgba(159,182,216,.25); border-top-color: #9fb6d8;
+    animation: rsh-turn .7s linear infinite;
+}
+@keyframes rsh-turn { to { transform: rotate(360deg); } }
+
+.rsh-settings .rsh-allset {
+    margin: 10px 0 0; padding: 8px 10px; border-radius: 7px; font-size: .8rem;
+    background: rgba(110,164,79,.12); border-left: 3px solid #6ea44f;
+}
+.rsh-settings .rsh-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.rsh-settings .rsh-primary { font-weight: 600; }
+
+/* Settings sit in the open. They were behind a gear icon, which meant nobody found
+   them and everybody had to be told where they were. */
+.rsh-settings .rsh-more {
+    margin-top: 12px; padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+.rsh-settings .rsh-morebody { display: flex; flex-direction: column; gap: 7px; }
+.rsh-settings .rsh-line { display: flex; align-items: center; gap: 8px; }
+.rsh-settings .rsh-line label { min-width: 100px; font-size: .8rem; }
+.rsh-settings .rsh-line select { width: auto; }
+.rsh-settings .rsh-note { font-size: .72rem; opacity: .55; line-height: 1.45; }
+
+/* remove: present, but never the first thing you see */
+.rsh-settings .rsh-x {
+    font: inherit; font-size: .8rem; line-height: 1; padding: 3px 6px; margin-left: 2px;
+    border: none; background: none; color: inherit; opacity: .28; cursor: pointer;
+    border-radius: 4px; transition: opacity .15s, background .15s, color .15s;
+}
+.rsh-settings .rsh-x:hover { opacity: 1; color: #e06c6c; background: rgba(224,108,108,.14); }
+
+/* Link out to the extension's page. Pinned to the corner rather than given a column
+   of its own: as a flex child it pushed the buttons inward and stretched every row
+   for the sake of one character. */
+.rsh-settings .rsh-row { position: relative; }
+.rsh-settings .rsh-page {
+    position: absolute; top: 2px; right: 3px;
+    text-decoration: none; font-size: 13px; line-height: 1;
+    padding: 3px 4px; border-radius: 4px;
+    opacity: .38; transition: opacity .15s, color .15s, background .15s;
+}
+.rsh-settings .rsh-row:hover .rsh-page { opacity: .75; }
+.rsh-settings .rsh-page:hover { opacity: 1; color: #9fb6d8; background: rgba(159,182,216,.14); }
+
+/* ---- shared connection ----
+   Was a <details> with a plain summary line, and nobody could tell it was clickable.
+   It now looks like what it is: a bar you press, with a chevron that turns. */
+.rsh-settings .rsh-conn { margin: 0 0 10px; }
+.rsh-settings .rsh-connhead {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    padding: 8px 11px; border-radius: 7px; font-size: .85rem;
+    background: rgba(159,182,216,.10);
+    border: 1px solid rgba(159,182,216,.30);
+    transition: background .15s, border-color .15s;
+}
+.rsh-settings .rsh-connhead:hover { background: rgba(159,182,216,.18); border-color: rgba(159,182,216,.5); }
+.rsh-settings .rsh-connhead b { flex: 0 0 auto; }
+.rsh-settings .rsh-connhead .rsh-counts { margin-left: auto; }
+.rsh-settings .rsh-chev { flex: 0 0 auto; opacity: .6; font-size: .8rem; transition: transform .18s; }
+.rsh-settings .rsh-chev.open { transform: rotate(180deg); }
+.rsh-settings .rsh-note.local { color: #9fb6d8; opacity: .85; }
+
+.rsh-settings .rsh-connlist { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
+.rsh-settings .rsh-cline {
+    display: flex; align-items: center; gap: 8px; padding: 3px 6px; border-radius: 5px;
+    font-size: .76rem;
+}
+.rsh-settings .rsh-cline.own { background: rgba(159,182,216,.08); }
+.rsh-settings .rsh-cname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rsh-settings .rsh-cval { opacity: .7; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rsh-settings .rsh-cval.shared { opacity: .4; }
+.rsh-settings .rsh-mini {
+    font: inherit; font-size: .7rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.13); color: inherit;
+}
+.rsh-settings .rsh-mini:hover { filter: brightness(1.35); }

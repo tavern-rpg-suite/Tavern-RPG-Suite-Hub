@@ -391,6 +391,29 @@ function useSharedFor(key) {
     toastr.info(t('connNowShared', { name: CONN_KEYS[key] || key }));
 }
 
+/* Local servers ignore the key, but every extension in the suite borrows the shared
+   profile with the rule `apiKey && model` and skips a keyless one — then reports
+   "no API key", or falls through to a sibling whose key belongs to a different
+   provider and comes back with a 401. So the placeholder is written into the profile
+   itself, whenever it is touched, rather than only when the URL field changes.
+   Returns 'filled' when it just added the placeholder, so the caller can say so. */
+function normalizeShared() {
+    try {
+        const s = shared();
+        if (!s) return null;
+        const key = String(s.apiKey || '').trim();
+        if (isLocalUrl(s.baseUrl)) {
+            if (!key) { s.apiKey = LOCAL_KEY; saveSettingsDebounced(); return 'filled'; }
+        } else if (key === LOCAL_KEY) {
+            // moved to a remote host: the placeholder would go out as a real key
+            s.apiKey = '';
+            saveSettingsDebounced();
+            return 'cleared';
+        }
+        return null;
+    } catch (e) { return null; }
+}
+
 function renderConn() {
     const box = document.getElementById('rsh-conn-list');
     if (!box) return;
@@ -422,6 +445,7 @@ function renderConn() {
 }
 
 function bindConn() {
+    normalizeShared();          // a profile saved before this fix is repaired on open
     const s = shared();
     $('#rsh-conn-url').val(s.baseUrl || '').off('change').on('change', function () {
         const url = String($(this).val()).trim();
@@ -431,8 +455,7 @@ function bindConn() {
            string. Rather than leave that as a chore to be done by hand in every panel,
            a neutral placeholder is written once — and said out loud, because a field
            filling itself in is otherwise alarming. */
-        if (isLocalUrl(url) && !shared().apiKey) {
-            shared().apiKey = LOCAL_KEY;
+        if (normalizeShared() === 'filled') {
             $('#rsh-conn-key').val(LOCAL_KEY);
             toastr.info(t('connLocalFilled'));
         }
@@ -440,10 +463,14 @@ function bindConn() {
         renderConn();
     });
     $('#rsh-conn-key').val(s.apiKey || '').off('change').on('change', function () {
-        shared().apiKey = String($(this).val()).trim(); saveSettingsDebounced(); renderConn();
+        shared().apiKey = String($(this).val()).trim();
+        if (normalizeShared() === 'filled') $('#rsh-conn-key').val(LOCAL_KEY);
+        saveSettingsDebounced(); renderConn();
     });
     $('#rsh-conn-model').val(s.model || '').off('change').on('change', function () {
-        shared().model = String($(this).val()).trim(); saveSettingsDebounced(); renderConn();
+        shared().model = String($(this).val()).trim();
+        if (normalizeShared() === 'filled') $('#rsh-conn-key').val(LOCAL_KEY);
+        saveSettingsDebounced(); renderConn();
     });
     renderConn();
 }
@@ -848,6 +875,8 @@ window.RPG_SUITE_HUB = {
 jQuery(async () => {
     console.log('[Suite Hub] loaded');
     loadSettings();
+    // Repair a profile saved by an older build before any extension reads it.
+    normalizeShared();
     // English by default, on purpose: this panel is the first thing a stranger sees,
     // and guessing wrong at the language is a worse first impression than one click.
     mount();

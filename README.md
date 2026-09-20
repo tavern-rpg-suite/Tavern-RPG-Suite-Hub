@@ -71,6 +71,9 @@ Nothing is changed inside another extension's settings without your action. You 
 
 ### 🖥️ Local Models
 
+<img width="409" height="584" alt="Screenshot_3" src="https://github.com/user-attachments/assets/1a13d6b3-d5ad-4f4f-929d-6b4137f63947" />
+
+
 Local backends are supported too, including **KoboldCpp, oobabooga, LM Studio, Ollama**, and other OpenAI-compatible servers running on your computer or LAN.
 
 Local endpoints such as `localhost` and `127.0.0.1` are recognised automatically, with `/v1` added when needed and API keys treated as optional.

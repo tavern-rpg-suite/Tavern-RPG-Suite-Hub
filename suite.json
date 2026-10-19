@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-10-19",
   "note": "The hub reads this file. Add an extension here and it appears for everyone who already has the hub installed — no update needed on their side.",
   "extensions": [
     { "emoji": "🎒", "name": "Tavern RPG Engine", "key": "tavern_rpg_engine",
@@ -43,8 +43,14 @@
       "url": "https://github.com/tavern-rpg-suite/RPG-Phone",
       "desc": { "en": "Messaging with your characters, who write to you first when they feel like it.", "ru": "Переписка с персонажами, которые пишут первыми, когда им хочется." } },
     { "emoji": "🌆", "name": "RPG Living Scene", "key": "rpg_living_scene",
-      "url": "https://github.com/tavern-rpg-suite/RPG-Living-Scene",
+      "url": "https://github.com/tavern-rpg-suite/RPG-Living-Scene",      
       "desc": { "en": "Background lines from everyone else in the room, so a scene is not just two people talking.", "ru": "Фоновые реплики остальных в комнате, чтобы сцена не была разговором двоих в пустоте." } },
+    { "emoji": "🐇", "name": "RPG Dungeons", "key": "rpg_dungeons",
+      "url": "https://github.com/tavern-rpg-suite/RPG-Dungeons",
+      "desc": { "en": "A roguelike inside your character's dreams: six rabbit holes, six relics from their life and six companions from their world. The roleplay itself stays untouched.", "ru": "Рогалик во снах персонажа: шесть кроличьих нор, шесть реликвий из его жизни и шесть спутников из его мира. Сам ролеплей не затрагивается." } },
+    { "emoji": "👑", "name": "Tavern Suite Menu", "key": "rpg_hub",
+      "url": "https://github.com/tavern-rpg-suite/Tavern-Suite-Menu",
+      "desc": {"en": "A visual-novel main menu: where you left off, the deck of characters, dossiers, the diary as a book, the map, letters and the rabbit hole.", "ru": "Главное меню в стиле визуальной новеллы: где ты остановилась, колода персонажей, досье, дневник-книга, карта, письма и кроличья нора." } },
     { "emoji": "📜", "name": "CHAOS & SOUL preset", "key": null,
       "url": "https://github.com/tavern-rpg-suite/CHAOS-SOUL-RP-PRESET",
       "desc": { "en": "Not an extension — a roleplay preset. Download and import it in SillyTavern.", "ru": "Не расширение, а пресет ролеплея. Скачай и импортируй в таверне." },

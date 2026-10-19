@@ -55,6 +55,8 @@ The Hub brings all the modules together, but **each extension remains optional**
 * 🚪 [Tavern-Doors](https://github.com/tavern-rpg-suite/Tavern-Doors) — compresses completed parts of a long chat into dense summaries.
 * 📱 [RPG-Phone](https://github.com/tavern-rpg-suite/RPG-Phone) — character messaging, including characters starting conversations themselves.
 * 🌆 [RPG Living Scene](https://github.com/tavern-rpg-suite/RPG-Living-Scene) — background activity and dialogue from other characters in the scene.
+* 🐇 [RPG Dungeons — The Rabbit Hole](https://github.com/tavern-rpg-suite/RPG-Dungeons) — a roguelike inside your character's dreams: six rabbit holes, six relics from their life and six companions from their world; the roleplay itself stays untouched.
+* 👑 [Tavern Suite Menu](https://github.com/tavern-rpg-suite/Tavern-Suite-Menu) — a visual-novel main menu: where you left off, the deck of characters, dossiers, the diary as a book, the map, letters and the rabbit hole.
 * 📜 [Chaos & Soul RP Preset](https://github.com/tavern-rpg-suite/CHAOS-SOUL-RP-PRESET)  — a roleplay preset for SillyTavern.
 
 > ⭐ **Start with Tavern RPG Engine.** It provides the shared connection that several other extensions use.

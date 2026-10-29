@@ -232,12 +232,16 @@ function isInstalled(item) {
 }
 
 /* ---------- the catalogue ---------- */
+// Only the suite's own repositories can be installed from here: if the catalogue were ever
+// tampered with, it still could not offer a stranger's code or a javascript: link.
+const SUITE_REPO = /^https:\/\/github\.com\/tavern-rpg-suite\/[A-Za-z0-9._-]+\/?$/;
+function ownOnly(list) { return (Array.isArray(list) ? list : []).filter(x => x && typeof x.url === 'string' && SUITE_REPO.test(x.url)); }
 async function fetchCatalog() {
     try {
         const r = await fetch(CATALOG_URL + '?t=' + Date.now(), { cache: 'no-store' });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const d = await r.json();
-        if (Array.isArray(d?.extensions) && d.extensions.length) return { list: d.extensions, remote: true };
+        if (Array.isArray(d?.extensions) && ownOnly(d.extensions).length) return { list: ownOnly(d.extensions), remote: true };
         throw new Error('empty catalogue');
     } catch (e) {
         console.warn('[Suite Hub] remote catalogue unavailable:', e);
@@ -245,7 +249,7 @@ async function fetchCatalog() {
             const url = new URL(LOCAL_CATALOG, import.meta.url).href;
             const r = await fetch(url);
             const d = await r.json();
-            return { list: d.extensions || [], remote: false };
+            return { list: ownOnly(d.extensions), remote: false };
         } catch (e2) {
             console.error('[Suite Hub] bundled catalogue unreadable:', e2);
             return { list: [], remote: false };

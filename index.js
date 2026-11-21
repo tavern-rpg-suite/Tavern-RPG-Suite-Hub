@@ -804,6 +804,7 @@ function panelHtml() {
           <div id="rsh-conn-list" class="rsh-connlist"></div>
         </div>
       </div>
+      <div id="rsh-slot-seal"></div><!-- the suite seal's settings move in here (suite core 4 and newer) -->
       <div id="rsh-list" class="rsh-list"></div>
       <div id="rsh-allset" class="rsh-allset" style="display:none;">✅ ${t('allset')}</div>
       <div class="rsh-actions">
